@@ -6,14 +6,11 @@
 // a = 9, b = -3 -> да
 // a = -3 b = 9 -> нет
 
+Console.Write("Введите первое число:");
 int a = Convert.ToInt32(Console.ReadLine());
+
+Console.Write("Введите второе число:");
 int b = Convert.ToInt32(Console.ReadLine());
 
-if (a == b*b)
-{
-    Console.WriteLine("да");
-}
-else 
-{
-    Console.WriteLine("нет");
-}
+if (a == b*b) Console.WriteLine($"Число {a} является квадратом числа {b}");
+else Console.WriteLine($"Число {a} не является квадратом числа {b}");
