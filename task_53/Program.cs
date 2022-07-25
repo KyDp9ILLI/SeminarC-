@@ -1,6 +1,6 @@
-﻿// адача 51: Задайте двумерный массив. Найдите сумму
-// элементов, находящихся на главной диагонали (с индексами
-// (0,0); (1;1) и т.д.
+﻿// Задача 53: Задайте двумерный массив. Напишите программу,
+// которая поменяет местами первую и последнюю строку
+// массива
 
 
 Console.Write("Введите количество строк:");
@@ -30,31 +30,18 @@ int[,] CreateMatrixRndInt(int m, int n, int min, int max)
     return arr;
 }
 
-int FindElemCentral(int[,] arr)
+int[,] SwapLineMatrix(int[,] arr)
 {
-    int sum = 0;
-    for (int i = 0; i < arr.GetLength(0); i++)
+    int temp = 0;
+    for (int j = 0; j < arr.GetLength(1); j++)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
-        {
-            if (i == j)
-                sum += arr[i, j];
-        }
-    }
-    return sum;
+        temp = arr[0,j];
+        arr[0,j] = arr[arr.GetLength(0)-1,j];
+        arr[arr.GetLength(0)-1,j] = temp;
+    }    
+    
+    return arr;
 }
-
-// int FillMatrix(int[,] arr)
-// {
-//     int sum = 0;
-//     int index = 0;
-//     if (arr.GetLength(0) > arr.GetLength(1)) index = 1;
-//     for (int i = 0; i < arr.GetLength(index); i++)
-//     {
-//         sum += arr[i, i];
-//     }
-//     return sum;
-// }
 
 void PrintMatrix(int[,] arr)
 {
@@ -78,5 +65,5 @@ PrintMatrix(array);
 
 Console.WriteLine();
 
-int sum = FindElemCentral(array);
-Console.WriteLine($"Сумма элементов находящихся на главной диагонали = {sum}");
+array = SwapLineMatrix(array);
+PrintMatrix(array);

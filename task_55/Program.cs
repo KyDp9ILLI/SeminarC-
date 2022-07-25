@@ -1,6 +1,8 @@
-﻿// адача 51: Задайте двумерный массив. Найдите сумму
-// элементов, находящихся на главной диагонали (с индексами
-// (0,0); (1;1) и т.д.
+﻿// Задача 55: Задайте двумерный массив. Напишите программу,
+// которая заменяет строки на столбцы. В случае, если это
+// невозможно, программа должна вывести сообщение для
+// пользователя.
+
 
 
 Console.Write("Введите количество строк:");
@@ -30,31 +32,22 @@ int[,] CreateMatrixRndInt(int m, int n, int min, int max)
     return arr;
 }
 
-int FindElemCentral(int[,] arr)
+int[,] SwapLineColumnMatrix(int[,] arr)
 {
-    int sum = 0;
+    int[,] tmp = new int[arr.GetLength(1), arr.GetLength(0)];
     for (int i = 0; i < arr.GetLength(0); i++)
     {
         for (int j = 0; j < arr.GetLength(1); j++)
         {
-            if (i == j)
-                sum += arr[i, j];
+            tmp[j, i] = arr[i, j];
         }
+        // tmp = arr[0,j];
+        // arr[0,j] = arr[arr.GetLength(0)-1,j];
+        // arr[arr.GetLength(0)-1,j] = temp;
     }
-    return sum;
-}
 
-// int FillMatrix(int[,] arr)
-// {
-//     int sum = 0;
-//     int index = 0;
-//     if (arr.GetLength(0) > arr.GetLength(1)) index = 1;
-//     for (int i = 0; i < arr.GetLength(index); i++)
-//     {
-//         sum += arr[i, i];
-//     }
-//     return sum;
-// }
+    return tmp;
+}
 
 void PrintMatrix(int[,] arr)
 {
@@ -73,10 +66,13 @@ void PrintMatrix(int[,] arr)
     }
 }
 
-int[,] array = CreateMatrixRndInt(sizeM, sizeN, minimal, maximal);
-PrintMatrix(array);
-
+int[,] array = CreateMatrixRndInt(sizeM, sizeN, minimal, maximal);PrintMatrix(array);
 Console.WriteLine();
 
-int sum = FindElemCentral(array);
-Console.WriteLine($"Сумма элементов находящихся на главной диагонали = {sum}");
+if (array.GetLength(0) != array.GetLength(1))
+    Console.WriteLine("Невозможно заменить строки столбцами");
+else
+{
+    array = SwapLineColumnMatrix(array);
+    PrintMatrix(array);
+}
